@@ -31,9 +31,7 @@ var PersonBox = React.createClass({
 
         // Determine an item is active
         var isItemActive = function(activeItem, i){
-            return activeItem && _.some(activeItem, function(item){
-              return i.id == item;
-            });
+            return activeItem && (activeItem == getItemValue(i));
         };
 
         // Map a list item to index for grouping

@@ -21,9 +21,16 @@ var RootBox = React.createClass({
         }
     },
     setItem: function(person_id){
+      // Toggle
+      if (this.state.person != person_id){
         this.setState({
           person: person_id
         });
+      }else{
+        this.setState({
+          person: null
+        });
+      }
     },
     _cleanData: function(data) {
         console.log("_cleanData");
