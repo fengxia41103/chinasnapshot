@@ -45,17 +45,18 @@ class AdminDivisionResource(MyModelResource):
 
 
 class OrgResource(MyModelResource):
-    admin = fields.ForeignKey(AdminDivisionResource, 'division')
+    admin = fields.ForeignKey(AdminDivisionResource, 'admin', full=True)
 
     class Meta:
         queryset = Org.objects.all()
+        excludes = ['ref', 'abbrev']
         filtering = {
             'admin': ALL_WITH_RELATIONS
         }
 
 
 class TitleResource(MyModelResource):
-    org = fields.ForeignKey(OrgResource, 'org')
+    org = fields.ForeignKey(OrgResource, 'org', full=True)
 
     class Meta:
         queryset = Title.objects.all()

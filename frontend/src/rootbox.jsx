@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import d3plus from 'd3plus';
-import PersonBox from "./persons.jsx";
+import PersonIndexBox from "./persons.jsx";
+import ProfileBox from "./profile.jsx";
 import AjaxContainer from "./ajax.jsx";
 
 var _ = require('lodash');
@@ -15,8 +15,6 @@ var RootBox = React.createClass({
     getInitialState: function() {
         return {
             data: [],
-            keys: [],
-            selectedKeys: [],
             person: null,
         }
     },
@@ -32,19 +30,13 @@ var RootBox = React.createClass({
         });
       }
     },
-    _cleanData: function(data) {
-        console.log("_cleanData");
-    },
-    componentWillMount: function() {
-        var cleanData = this._cleanData;
-      var data = $.getJSON("/downloads/demo.json");
-    },
-
     render: function() {
         return (
           <div className = "container" >
-            <PersonBox setItem={this.setItem}
+            <PersonIndexBox setItem={this.setItem}
                        activeItem={this.state.person}/>
+
+            <ProfileBox activeItem={this.state.person} />
           </div>
         );
     }

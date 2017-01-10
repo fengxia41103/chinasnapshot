@@ -9,7 +9,7 @@ var classNames = require('classnames');
 //    Country containers
 //
 //****************************************
-var PersonBox = React.createClass({
+var PersonIndexBox = React.createClass({
     render: function(){
         // Index list
         var indexes = "abcdefghijklmnopqrstuvwxyz".toUpperCase().split("");
@@ -71,4 +71,4 @@ var PersonBox = React.createClass({
     }
 });
 
-module.exports = PersonBox;
+module.exports = PersonIndexBox;

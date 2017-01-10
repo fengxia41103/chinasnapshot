@@ -15,6 +15,7 @@ from django.db.models import Q
 from datetime import datetime as dt
 from django.db.models.signals import pre_save, post_save
 from django.dispatch import receiver
+from django.utils.timezone import now
 
 
 class MyBaseModel (models.Model):
@@ -168,9 +169,6 @@ class AdminDivision(MyBaseModel):
         blank=True
     )
 
-    def __unicode__(self):
-        return self.name
-
 
 class Org(MyBaseModel):
     admin = models.ForeignKey(
@@ -183,30 +181,19 @@ class Org(MyBaseModel):
         blank=True
     )
 
-    def __unicode__(self):
-        return u'-'.join([self.admin.__unicode__(), self.name])
-
 
 class Title(MyBaseModel):
-    org = models.ForeignKey(
-        'Org'
-    )
+    org = models.ForeignKey('Org')
     grade = models.IntegerField(
         default=0,
         verbose_name=u'pay grade'
     )
 
-    def __unicode__(self):
-        return u'-'.join([self.org.__unicode__(), self.name])
 
-
-class Person(models.Model):
+class Person(MyBaseModel):
     SEX_CHOICES = (
         ('M', 'male'),
         ('F', 'female')
-    )
-    name = models.CharField(
-        max_length=16
     )
     sex = models.CharField(
         max_length=1,
@@ -216,15 +203,6 @@ class Person(models.Model):
         null=True,
         blank=True
     )
-    eng_name = models.CharField(
-        max_length=256,
-        null=True,
-        blank=True,
-        verbose_name=u'Person name (eng)'
-    )
-
-    def __unicode__(self):
-        return self.name
 
 
 class Career(models.Model):
