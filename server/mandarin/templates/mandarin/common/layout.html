@@ -1,0 +1,416 @@
+{% load staticfiles %}
+{% load compress %}
+{% load crispy_forms_tags %}
+
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+	{# http://hammerjs.github.io/getting-started/ #}
+	<meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1">
+
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+
+{% block core_library %}
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <!-- script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script -->
+      <!-- script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script -->
+      <script src="{% static 'js/html5shiv.min.js' %}"></script>
+      <script src="{% static 'js/respond.min.js' %}"></script>
+    <![endif]-->
+
+    {# Bootstrap #}
+	<link rel="stylesheet" href="{% static 'bower_components/bootstrap/dist/css/bootstrap.min.css' %}">
+
+	<!-- Latest compiled and minified CSS -->
+	{# http://www.bootstrapcdn.com/?theme=14#bootswatch_tab #}
+	<!-- <link rel="stylesheet" href="{% static 'bootstrap3/css/bootstrap.min.css' %}"> -->
+
+	{# used when there is no INTERNET #}
+	<link rel="stylesheet" href="{% static 'fontawesome/css/font-awesome.css' %}">
+
+	<!-- application specific css -->
+	<!--link rel="stylesheet" type="text/x-scss" href="{% static 'sass/my.scss' %}"-->
+
+	{# lightbos http://ashleydw.github.io/lightbox/ #}
+	<link rel="stylesheet" type="text/css" href="{% static 'bower_components/lightbox2/dist/css/lightbox.min.css' %}">
+
+	{# loading spinner: http://msurguy.github.io/ladda-bootstrap/ #}
+	<link rel="stylesheet" type="text/css" href="{% static 'loading/ladda-themeless.min.css' %}">
+
+	{# DataTable #}
+	<link rel="stylesheet" type="text/css" href="{% static 'datatable/css/jquery.dataTables.min.css' %}">
+
+	{# jqcloud #}
+	<link rel="stylesheet" type="text/css" href="{% static 'jqcloud/jqcloud.css' %}">
+
+	{# toast https://github.com/CodeSeven/toastr #}
+	<link rel="stylesheet" type="text/css" href="{% static 'toastr/toastr.min.css' %}">
+
+	<link rel="stylesheet" type="text/css" href="{% static 'css/chegg.css' %}">
+
+	{# app specific tweaks #}
+	<link rel="stylesheet" type="text/css" href="{% static 'sass/my.css' %}">
+
+	{# bootstrap3-datepicker #}
+	<link rel="stylesheet" type="text/css" href="{% static 'bootstrap-datepicker/css/bootstrap-datepicker.min.css' %}">
+
+	{# visjs #}
+	<link rel="stylesheet" type="text/css" href="{% static 'visjs/vis.min.css' %}">
+
+    {# google fonts #}
+
+	{# bootstrap toggle switch, http://www.bootstrap-switch.org/ #}
+	<link rel="stylesheet" type="text/css" href="{% static 'bootstrap-toggle-switch/css/bootstrap3/bootstrap-switch.min.css' %}">
+
+	{# flippant, https://github.com/mintchaos/flippant.js #}
+	<link rel="stylesheet" type="text/css" href="{% static 'flippant/flippant.css' %}">
+
+	{# JQuery lib #}
+	<script type="text/javascript" src="{% static 'jquery/jquery-2.1.3.min.js' %}"></script>
+{% endblock %}
+
+{# extra css code #}
+{% block theme_css %}
+<link rel="stylesheet" href="{% static 'bootstrap3/css/bootstrap-theme.simplex.min.css' %}">
+{% endblock %}
+{% block custom_css %}
+{% endblock %}
+
+{# page title #}
+{% block title %}
+{% endblock %}
+</head>
+
+<body>
+{% block navbar %}
+{% endblock %}<!-- end of block navbar -->
+
+{% block main %}
+	<div class="col-sm-1">
+		<ul class="nav nav-stacked affix">
+		{% block nav-sidebar %}
+		{% endblock %}
+		</ul>
+	</div>
+
+	{% block custom_tags %}
+	{% endblock %}
+	<div id="wrap">
+	<div class="container">
+		<div class="page-header">
+			<h1>
+				{% block page-header %}
+				{% endblock %}
+			</h1>
+		</div><!-- end of block header -->
+		{% block message %}
+		{% endblock %}
+
+		{% block content %}
+		{% endblock %}
+	</div><!-- /.container -->
+	<div id="push"></div>
+	</div>
+{% endblock %}<!-- end of block main -->
+
+{% block modal %}
+{% endblock %}
+
+{# sandbox for testing client libs/css/js #}
+{% block test %}
+{% endblock %}
+
+{% block footer %}
+<footer id="footer">
+    <div style="text-align:center; margin-top:5em;">
+        <h4>
+            2016 PY Consulting Ltd.
+            1236 Beacon Street, Brookline, MA 02446
+        </h4>
+
+        <ul class="list-inline">
+            <li>
+                <a href="mailto:{{EMAIL_ADDRESS}}">
+                    <i class="fa fa-envelope"></i>
+                </a>
+            </li>
+
+            <li>
+                <a href="{{GITHUB_ADDRESS}}">
+                    <i class="fa fa-github"></i>
+                </a>
+            </li>
+            <li>
+                <a href="{{LINKEDIN_ADDRESS}}">
+                    <i class="fa fa-linkedin"></i>
+                </a>
+            </li>
+            <li>
+                <a href="">
+                    <i class="fa fa-phone-square"></i>
+                    (508)801-1794
+                </a>
+            </li>
+
+        </ul>
+        <p>
+            <i class="fa fa-copyright" ></i>All rights reserved.
+        </p>
+    </div>
+</footer>
+{% endblock %}<!- end of block footer -->
+
+<!-- Placed at the end of the document so the pages load faster -->
+{% block Javascripts %}
+    <script type="text/javascript"
+    	src="{% static 'echarts/echarts-all.js' %}">
+    </script>
+
+	<!-- Bootstrap -->
+	<script
+       src="{% static 'bower_components/bootstrap/dist/js/bootstrap.min.js' %}">
+    </script>
+
+
+	<!-- syntaxhighlighter -->
+	<script type="text/javascript" src="{% static 'syntaxhighlighter/scripts/shCore.js' %}"></script>
+	<script type="text/javascript" src="{% static 'syntaxhighlighter/scripts/shBrushPython.js' %}"></script>
+
+    <script type="text/javascript"
+    	src="{% static 'js/jquery.cookie.js' %}">
+    </script>
+
+    <!-- http://malsup.com/jquery/block/#demos -->
+    <script type="text/javascript"
+    	src="{% static 'js/jquery.blockUI.min.js' %}">
+    </script>
+
+    {# loading spinner #}
+    <script type="text/javascript"
+    	src="{% static 'loading/spin.min.js' %}">
+    </script>
+    <script type="text/javascript"
+    	src="{% static 'loading/ladda.min.js' %}">
+    </script>
+
+	{# DataTable #}
+    <script type="text/javascript"
+    	src="{% static 'datatable/js/jquery.dataTables.min.js' %}">
+    </script>
+    <script type="text/javascript"
+    	src="{% static 'datatable/js/dataTables.bootstrap.min.js' %}">
+    </script>
+    <script type="text/javascript"
+    	src="{% static 'datatable/js/jquery.dataTables.editable.js' %}">
+    </script>
+    <script type="text/javascript"
+    	src="{% static 'datatable/js/jquery.jeditable.js' %}">
+    </script>
+
+	{# lightbos: http://ashleydw.github.io/lightbox/ #}
+    <script type="text/javascript"
+    	src="{% static 'bower_components/lightbox2/dist/js/lightbox.min.js' %}">
+    </script>
+
+    {# newticker: http://risq.github.io/jquery-advanced-news-ticker/ #}
+    <script type="text/javascript"
+    	src="{% static 'newsticker/jquery.newsTicker.min.js' %}">
+    </script>
+
+    {# https://github.com/lucaong/jQCloud #}
+    <script type="text/javascript"
+    	src="{% static 'jqcloud/jqcloud-1.0.4.min.js' %}">
+    </script>
+
+	{# toast https://github.com/CodeSeven/toastr #}
+    <script type="text/javascript"
+    	src="{% static 'toastr/toastr.min.js' %}">
+    </script>
+
+	{# TOC https://github.com/dcneiner/TableOfContents/tree/master #}
+    <script type="text/javascript"
+    	src="{% static 'js/jquery.toc.min.js' %}">
+    </script>
+
+    {# bootstrap datepicker #}
+    <script type="text/javascript"
+    	src="{% static 'bootstrap-datepicker/js/bootstrap-datepicker.min.js' %}">
+    </script>
+
+    {# visjs #}
+    <script type="text/javascript"
+    	src="{% static 'visjs/vis.min.js' %}">
+    </script>
+
+    {# sticky header https://github.com/jmosbech/StickyTableHeaders #}
+    <script type="text/javascript"
+    	src="{% static 'stickyheader/jquery.stickytableheaders.min.js' %}">
+    </script>
+
+    {# jquery validate #}
+    <script type="text/javascript"
+    	src="{% static 'validator/jquery.validate.min.js' %}">
+    </script>
+
+    {# JsBarcode, https://github.com/lindell/JsBarcode #}
+    <script type="text/javascript"
+    	src="{% static 'barcode/JsBarcode.all.min.js' %}">
+    </script>
+
+    {# highcharts #}
+    <script type="text/javascript"
+    	src="{% static 'highcharts/highcharts-custom.js' %}">
+    </script>
+    <script type="text/javascript"
+    	src="{% static 'highcharts/js/modules/exporting.js' %}">
+    </script>
+
+    {# bootstrap toggle switch #}
+    <script type="text/javascript"
+    	src="{% static 'bootstrap-toggle-switch/js/bootstrap-switch.min.js' %}">
+    </script>
+
+    {# flippant #}
+    <script type="text/javascript"
+    	src="{% static 'flippant/flippant.min.js' %}">
+    </script>
+
+    {# jQuery ajax form plugin #}
+    <script type="text/javascript"
+    	src="{% static 'form/jquery.form.js' %}">
+    </script>
+
+    {# hammer.js, gestures! http://hammerjs.github.io/ #}
+    <script type="text/javascript"
+    	src="{% static 'hammer/hammer.min.js' %}">
+    </script>
+
+    {# django dynamic formset, https://github.com/elo80ka/django-dynamic-formset #}
+    <script type="text/javascript"
+    	src="{% static 'formset/jquery.formset.js' %}">
+    </script>
+
+
+    {# application js #}
+	<script type="text/javascript">
+		var j$ = jQuery.noConflict();
+
+		// set up csrf token for jQuery ajax call to Django views
+		var csrftoken = j$.cookie('csrftoken');
+		function csrfSafeMethod(method) {
+		    // these HTTP methods do not require CSRF protection
+		    return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+		}
+		function sameOrigin(url) {
+		    // test that a given url is a same-origin URL
+		    // url could be relative or scheme relative or absolute
+		    var host = document.location.host; // host + port
+		    var protocol = document.location.protocol;
+		    var sr_origin = '//' + host;
+		    var origin = protocol + sr_origin;
+		    // Allow absolute or scheme relative URLs to same origin
+		    return (url == origin || url.slice(0, origin.length + 1) == origin + '/') ||
+		        (url == sr_origin || url.slice(0, sr_origin.length + 1) == sr_origin + '/') ||
+		        // or any other URL that isn't scheme relative or absolute i.e relative.
+		        !(/^(\/\/|http:|https:).*/.test(url));
+		}
+		j$.ajaxSetup({
+		    beforeSend: function(xhr, settings) {
+		        if (!csrfSafeMethod(settings.type) && sameOrigin(settings.url)) {
+		            // Send the token to same-origin, relative URLs only.
+		            // Send the token only if the method warrants CSRF protection
+		            // Using the CSRFToken value acquired earlier
+		            xhr.setRequestHeader("X-CSRFToken", csrftoken);
+		        }
+		    }
+		});
+
+		// make fadeOut effect shorter
+		j$.blockUI.defaults.fadeOut = 1000;
+		function myBlockUI(){
+ 			j$.blockUI({ css: {
+	            border: 'none',
+	            padding: '15px',
+	            backgroundColor: '#000',
+	            '-webkit-border-radius': '10px',
+	            '-moz-border-radius': '10px',
+	            opacity: .5,
+	            color: '#fff'
+	        	},
+	        	//'message':'请等待 ....'
+	        	'ignoreIfBlocked': true
+        	});
+		}
+
+		j$(document).ready(function(){
+            // django message
+            {% if messages %}
+            {% for message in messages %}
+               toastr.error('{{ message }}');
+            {% endfor %}
+            {% endif %}
+
+			// common global widget initializations
+			var table = j$('table.my-datatable').dataTable({
+				paging: false,
+				info:false,
+				"pagingType": "simple"
+			});
+
+			// register tab events
+			j$('a[data-toggle="tab"]').click(function ( e ) {
+			    e.preventDefault ();
+			    j$(this).tab('show');
+			});
+
+			// show first tab after page loading
+			j$('a[data-toggle="tab"]:first').tab('show');
+
+			// initialize all tooltips
+			j$("[data-toggle='tooltip']").tooltip({
+				'placement': 'bottom'
+			});
+
+			// navbar dropdown form
+			j$('.dropdown-menu').find('form').click(function (e) {
+				e.stopPropagation();
+			});
+
+			// form validate
+			j$('form').validate();
+
+			// datepicker
+		    j$('.dateinput').datepicker({
+		    	format: "yyyy-mm-dd" ,
+		    	todayHighlight: true,
+		    	todayBtn: true
+		   	});
+
+            // lightbox
+			j$(document).delegate('[data-type="attachment-thumbnail"]', 'click', function(e){
+				var url = j$(this).attr('src');
+				j$(this).closest('div.row').find('[data-toggle="lightbox"]').attr('href',url);
+				j$(this).closest('div.row').find('[data-toggle="lightbox"]').find('img:first-child').attr('src',url);
+			});
+		});
+	</script>
+{% endblock %} <!-- end of block JS -->
+
+{# extra javascript code #}
+{% block theme_js %}
+{% endblock %}
+{% block custom_js %}
+{% endblock %}
+</body>
+
+</html>

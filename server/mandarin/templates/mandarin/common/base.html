@@ -1,0 +1,298 @@
+{% extends 'erp/common/layout.html' %}
+{% load staticfiles %}
+{% load compress %}
+{% load crispy_forms_tags %}
+
+
+{% block title %}
+<title>SQ e-Commerce Platform</title>
+{% endblock %}
+
+{% block navbar %}
+	<div class="navbar navbar-default navbar-static-top" role="navigation">
+		<div class="container-fluid">
+		<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="{% url 'home' %}">
+					<i class="fa fa-home"></i>
+					SQ FASHION
+				</a>
+		</div>
+		<div class="collapse navbar-collapse">
+			<ul class="nav navbar-nav">
+
+				<li>
+					<a href="">
+					<i class="fa fa-user"></i>
+					你好 {{ user }}
+					</a>
+				</li>	
+
+				<li class="dropdown">
+					<a href="" class="" data-toggle="dropdown">
+						<i class="fa fa-bar-chart"></i>
+						CRM						
+						<b class="caret"></b>
+					</a>
+					<ul class="dropdown-menu">
+						<li>
+							<a href="{% url 'customer_list' %}">
+								<i class="fa fa-list"></i>
+								Customers
+							</a>						
+						</li>					
+						<li>
+							<a href="{% url 'vendor_list' %}">
+								<i class="fa fa-list"></i>
+								Vendors
+							</a>						
+						</li>														
+						<li class="divider"></li>
+						<li>
+							<a href="{% url 'customer_add' %}">
+								<i class="fa fa-pencil"></i>
+								New customer
+							</a>						
+						</li>					
+						<li>
+							<a href="{% url 'vendor_add' %}">
+								<i class="fa fa-pencil"></i>
+								New vendor
+							</a>						
+						</li>														
+					</ul>									
+				</li>
+
+				<li class="dropdown">
+					<a href="" class="" data-toggle="dropdown">
+						<i class="fa fa-search"></i>
+						Product									
+						<b class="caret"></b>
+					</a>
+					<ul class="dropdown-menu">					
+						<li>
+						<li>
+							<a href="{% url 'season_list' %}">
+							View by seasons
+							</a>
+						</li>	
+						<li>					
+							<a href="{% url 'item_list' %}">
+								<i class="fa fa-pencil"></i>
+								Search product
+							</a>						
+						</li>										
+						<li>					
+							<a href="{% url 'vendor_item_list' %}">
+								<i class="fa fa-pencil"></i>
+								Search vendor products
+							</a>						
+						</li>
+						<li class="divider"></li>
+						<li>
+							<a href="{% url 'item_add' %}">
+								<i class="fa fa-pencil"></i>
+								New product
+							</a>
+						</li>
+						<li>
+							<a href="{% url 'item_image_batch_upload' %}">
+								<i class="fa fa-pencil"></i>
+								Upload product images
+							</a>
+						</li>													
+					</ul>
+				</li>
+
+				<li class="dropdown">
+					<a href="" class="" data-toggle="dropdown">
+						<i class="fa fa-search"></i>
+						Inventory									
+						<b class="caret"></b>
+					</a>
+					<ul class="dropdown-menu">						
+						<li>
+							<a href="{% url "item_inv_add" %}">
+								New inventory adjustment
+							</a>						
+						</li>
+						<li>
+							<a href="{% url "location_list" %}">
+								Run physical inventory
+							</a>						
+						</li>																			
+					</ul>
+				</li>
+
+				<li class="dropdown">
+					<a href="" class="" data-toggle="dropdown">
+						<i class="fa fa-search"></i>
+						Sales Order									
+						<b class="caret"></b>
+					</a>
+					<ul class="dropdown-menu">
+						<li>
+							<a href="{% url "so_list" %}">
+								<i class="fa fa-plus"></i>
+								View orders			
+							</a>						
+						</li>
+						<li>
+							<a href="{% url "so_payment_list" %}">
+								<i class="fa fa-plus"></i>
+								View SO payments			
+							</a>						
+						</li>
+						<li>
+							<a href="{% url "so_fulfill_list" %}">
+								<i class="fa fa-plus"></i>
+								View SO fulfillments
+							</a>						
+						</li>
+						<li>
+							<a href="{% url "so_return_list" %}">
+								<i class="fa fa-plus"></i>
+								View SO returns
+							</a>						
+						</li>						
+						<li class="divider"></li>							
+						<li>
+							<a href="{% url "so_add" %}">
+								New order
+							</a>						
+						</li>														
+					</ul>
+				</li>
+				<li class="dropdown">
+					<a href="" class="" data-toggle="dropdown">
+						<i class="fa fa-search"></i>
+						Purchase Order									
+						<b class="caret"></b>
+					</a>
+					<ul class="dropdown-menu">
+						<li>
+							<a href="{% url "po_list" %}">
+								<i class="fa fa-plus"></i>
+								View orders			
+							</a>						
+						</li>														
+						<li>
+							<a href="{% url "po_fulfill_list" %}">
+								<i class="fa fa-plus"></i>
+								View PO fulfillments
+							</a>						
+						</li>
+						<li class="divider"></li>							
+						<li>
+							<a href="{% url "po_add" %}">
+								New order
+							</a>						
+						</li>														
+					</ul>
+				</li>				
+
+				<li class="dropdown">
+					<a href="" class="" data-toggle="dropdown">
+						<i class="fa fa-search"></i>
+						Invoice								
+						<b class="caret"></b>
+					</a>
+					<ul class="dropdown-menu">
+						<li>
+							<a href="{% url "invoice_list" %}">
+								<i class="fa fa-plus"></i>
+								View invoices			
+							</a>						
+						</li>
+						<li>
+							<a href="{% url "invoice_receive_list" %}">
+								<i class="fa fa-plus"></i>
+								View invoice receivings			
+							</a>						
+						</li>
+						<li class="divider"></li>
+
+						{# vendor sample invoice #}
+						<li>
+							<a href="{% url "vendor_sample_invoice_add" %}">
+								<i class="fa fa-plus"></i>
+								New sample invoice
+							</a>						
+						</li>
+
+						{# vendor consolidate invoice #}
+						<ul class="dropdown-menu" id="vendor-need-invoice-list">
+							{# vendor list who, by its fulfill status, can use another new invoice #}
+						</ul>
+					</ul>
+				</li>	
+
+				<li class="dropdown">
+					<a href="" class="" data-toggle="dropdown">
+						<i class="fa fa-search"></i>
+						Report								
+						<b class="caret"></b>
+					</a>
+					<ul class="dropdown-menu">
+						<li>
+							<a href="{% url "customer_ar_report" %}">
+								Customer AR			
+							</a>						
+						</li>
+						<li>
+							<a href="{% url "vendor_ap_report" %}">
+								Vendor AP		
+							</a>						
+						</li>
+						<li>
+							<a href="{% url "top_selling_product_report" 10 %}">
+								Top selling products		
+							</a>						
+						</li>
+						<li>
+							<a href="{% url "top_purchasing_product_report" 10 %}">
+								Top purchased products		
+							</a>						
+						</li>
+						<li>
+							<a href="{% url "top_fulfill_profit_product_report" 10 %}">
+								Top profitable products		
+							</a>						
+						</li>
+						<li>
+							<a href="{% url "top_so_qty_balance_report" 10 %}">
+								Top SO by QTY balance		
+							</a>						
+						</li>															
+						<li>
+							<a href="{% url "top_so_fulfill_in_progress_report" 10 %}">
+								Top SO in-progress fulfills
+							</a>						
+						</li>															
+						<li>
+							<a href="{% url "latest_physical_inventory_report" %}">
+								Latest physical inventory
+							</a>						
+						</li>	
+					</ul>
+				</li>
+
+				{% if user.is_authenticated %}
+				<li>
+					<a href="{% url 'logout' %}">
+						<i class="fa fa-sign-out"></i>
+						<span class="my-button-sm">Logout</span>
+					</a>
+				</li>
+				{% endif %}
+			</ul>
+		</div><!--/.nav-collapse -->
+		</div><!-- container-fluid -->
+	</div>
+{% endblock %}<!-- end of block navbar -->
+

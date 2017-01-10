@@ -1,0 +1,40 @@
+
+{# login modal #}
+<div class="modal fade" id="registrationModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">User Login</h4>
+      </div>
+
+        {% load crispy_forms_tags %}
+        <form action="{% url 'user_register' %}" method="post">      
+            <div class="modal-body">
+                {% csrf_token %}
+                <div class="row">
+                    <div class="col-sm-1"></div>
+                    <div class="col-sm-6 my-login-box">
+                        {% crispy registration_form %}
+                        {% if auth_form.errors %}
+                            <div class="alert alert-info">
+                                Your username and password didn’t match. Please try again.</p>
+                            </div>
+                        {% endif %}                
+                    </div>
+                    <div class="col-sm-4">Give user instructions how to login or registration.</div>                    
+                </div>
+                <div class="row modal-footer">
+                    <span class="addLink">
+                    <a href="{% url 'login' %}">来这里登录吧</a>
+                    </span>
+                    <input class="btn btn-primary default pull-right" type="submit" value="注册用户" />
+                    <input type="hidden" name="next" value="/intern/application/" />
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>              
+                </div>
+            </div>
+
+        </form>  
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->  

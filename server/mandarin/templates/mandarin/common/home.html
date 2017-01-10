@@ -1,0 +1,120 @@
+{% extends 'mandarin/common/base.html' %}
+{% load staticfiles %}
+{% load crispy_forms_tags %}
+{% load widget_tweaks %}
+
+{% block main %}
+<!-- Main -->
+<div id="main">
+
+	<!-- Header -->
+	<header id="header">
+		<h1>China Snapshot</h1>
+		<p>Make . Life . Better</p>
+
+        {% block login %}
+        <ul class="list-inline">
+            <li>
+                <button type="button" class="btn btn-default" data-toggle="modal" data-target="#registrationModal">
+                    Register
+                </button>
+            </li><li>
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#loginModal">
+                    Login
+                </button>
+            </li></ul>
+
+        {% endblock %}
+
+	<!-- Footer -->
+	<footer id="footer">
+		<ul class="copyright">
+			<li>&copy; PY Consulting Ltd.</li><li>Learn more:<a href="http://fengxia.co">blog</a>.</li>
+		</ul>
+	</footer>
+
+</div>
+
+{% endblock %}
+
+{% block theme_css %}
+<link rel="stylesheet" type="text/css" href="{% static 'theme/lens/assets/css/main.css' %}">
+{% endblock %}
+
+{% block theme_js %}
+<script type="text/javascript"
+        src="{% static 'theme/lens/assets/js/skel.min.js' %}">
+</script>
+<script type="text/javascript"
+        src="{% static 'theme/lens/assets/js/main.js' %}">
+</script>
+{% endblock %}
+
+{% block navbar %}
+{% endblock %}
+{% block footer %}
+{% endblock %}
+
+{% block modal %}
+<div class="modal fade" id="loginModal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form action="{% url 'login' %}" method="POST">
+                {% csrf_token %}
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title">User login</h4>
+                </div>
+                <div class="modal-body">
+
+
+                    {{ login_form|crispy }}
+                    {% if login_form.errors %}
+                    <div class="alert alert-danger">
+                        <p>Your username and password didn’t match. Please try again.</p>
+                    </div>
+                    {% endif %}
+
+
+                </div><!-- end of modal body-->
+                <div class="modal-footer">
+                    <input class="btn btn-primary btn-default" type="submit" value="Login" />
+                </div><!-- end of modal footer-->
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="registrationModal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form action="{% url 'user_register' %}" method="POST">
+
+                {% csrf_token %}
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title">Register new user</h4>
+                </div>
+                <div class="modal-body">
+
+                    {{ registration_form|crispy }}
+                    {% if form.errors %}
+                    <div class="alert alert-danger">
+                        <p>Your username/password are not successful. Please try again.</p>
+                    </div>
+                    {% endif %}
+
+
+                </div><!-- end of modal body-->
+                <div class="modal-footer">
+                    <input class="btn btn-primary default" type="submit" value="Register" />
+                </div><!-- end of modal footer-->
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

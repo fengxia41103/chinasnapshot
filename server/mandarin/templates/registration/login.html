@@ -1,0 +1,29 @@
+{% extends 'intern/common/home_base.html' %}
+
+{% block login %}
+{% load crispy_forms_tags %}
+<form action="" method="post">      
+    <div class="modal-body">
+        {% csrf_token %}
+        <div class="row">
+            <div class="col-sm-1"></div>
+            <div class="col-sm-4 my-login-box">
+                {% crispy form %}
+                {% if form.errors %}
+                    <div class="alert alert-info">
+                        Your username and password didn’t match. Please try again.</p>
+                    </div>
+                {% endif %}                
+            </div>
+            <div class="col-sm-6">Give user instructions how to login or registration.</div>                    
+        </div>
+        <div class="row modal-footer">
+            <span class="addLink">
+            <a href="{% url 'user_register' %}">新用户注册</a>
+            </span>
+            <input class="btn btn-primary default pull-right" type="submit" value="登录" />
+            <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>              
+        </div>
+    </div>
+</form>      
+{% endblock %}

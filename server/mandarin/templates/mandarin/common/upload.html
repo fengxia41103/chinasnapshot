@@ -1,0 +1,13 @@
+<!-- The file upload form used as target for the file upload widget -->
+
+{% load crispy_forms_tags %}
+<form id="fileupload" action="{% url 'attachment_add' obj.id %}" method="POST" enctype="multipart/form-data">
+	{% csrf_token %}
+	{{ attachment_form|crispy }}
+
+	<button type="submit" class="btn btn-primary start">
+		<i class="glyphicon glyphicon-upload"></i>
+		<span>Start upload</span>
+	</button>	
+</form>
+

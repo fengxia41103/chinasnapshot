@@ -1,0 +1,60 @@
+
+{% load crispy_forms_tags %}
+
+{# Load django_pagination #}
+{% load pagination_tags %}
+
+{% block filter %}
+<ul class="nav">
+<li class="dropdown">
+	<a class="dropdown-toggle" data-toggle="dropdown" href="">
+		<i class="fa fa-filter"></i>
+		Filters <span class="caret"></span>
+	</a>
+	<ul class="dropdown-menu" id="filters">
+		<li>
+			{# filter form #}
+			<div class="my-filter-form">
+				<form action="" method="get" class="form-inline" role="form">
+						{% csrf_token %}
+						
+						{{ filter.form|crispy }}
+					
+					<button class="my-btn" type="submit" id="id_btn_search_submit">Search</button>
+				</form>
+			</div>
+		</li>
+	</ul>
+</li>
+</ul>
+
+{% for filter,val in filters.iteritems %}
+	<span class="flabel">
+		<span class="badge">{{filter}}</span>
+		{{ val }}
+		<span class="glyphicon glyphicon-remove my-filter-value-close" for="{{ filter }}"></span>
+	</span>
+{% endfor %}
+
+{# paginator #}
+<div class="pull-right">
+	{# bootstrap_pagination page_obj #}
+	{# autopaginate object_list #}
+	{% paginate %}	
+</div>
+{% endblock %}
+
+{% block custom_js %}
+<script type="text/javascript">
+	var j$ = jQuery.noConflict();
+
+	j$(document).ready(function(){
+		j$('.my-filter-value-close').click(function(){
+			var id =j$(this).attr('for');
+			j$('#id_'+id).val('');
+			j$(this).parent().remove();
+			j$('#id_btn_search_submit').click();
+		});
+	});
+</script>
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends "erp/common/base.html" %}
+
+{% block page-header %}
+	{{ title }}
+	<a href="{{ list_url }}" class="btn btn-xs addlink">
+		<i class="fa fa-list"></i>
+		List
+	</a>
+{% endblock %}
+
+
+{% block content %}
+{% load crispy_forms_tags %}
+<form role="form" action="" method="post">
+	{% csrf_token %}
+	<div class="form-actions pull-right">
+		<input class="btn btn-small btn-primary default" type="submit" value="Save" />
+	</div>
+	{%crispy form %}     
+</form>
+
+<ul class="list-inline">
+{% for img in object.attachments.all %}
+	<li>
+		<img src="{{ img.file.url }}" 
+		data-type="attachment-thumbnail" class="img-responsive img-thumbnail"
+		style="width:100px;height:100px;">
+		{% if user.is_superuser %}
+			<a href="{% url 'attachment_delete' img.id %}">
+			<i class="fa fa-trash"></i></a>
+		{% endif %}
+	</li>
+{% endfor %}
+</ul>
+
+{% endblock %}
+
+

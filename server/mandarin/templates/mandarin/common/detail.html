@@ -1,0 +1,26 @@
+{% extends 'erp/common/base.html' %}
+
+{% block content %}
+{% block breadcrumb %}
+{% endblock %}
+<div class="">
+	<div class="col-md-8" style="background-color: white;">
+		{% block detail-school-header %}
+		{% endblock %}
+
+		<div style="margin:50px 0;clear:left;">
+	    {% block detail-navbar %}
+	    {% endblock %}
+	    </div>
+
+		{# page content #}
+		{% block detail-content %}
+		{% endblock %}
+	</div>
+
+	<div class="col-md-4" style="background-color: #f5f5f5;border-left:1px solid #fededd; padding:20px 20px;">
+		{% block detail-sidebar %}
+		{% endblock %}
+	</div>
+</div>
+{% endblock %}

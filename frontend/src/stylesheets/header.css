@@ -1,0 +1,21 @@
+video {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto; }
+
+.myheader {
+  min-height: 100vh;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  color: #d52349;
+  padding: 3em 0em;
+  margin-bottom: 2em;
+  overflow-x: hidden; }
+
+/*# sourceMappingURL=header.css.map */

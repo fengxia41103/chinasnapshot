@@ -1,0 +1,26 @@
+{% extends "erp/common/base.html" %}
+
+{% block page-header %}
+	{# section title #}
+	{{ title }}
+	<a href="{{ list_url }}" class="btn btn-xs addlink">
+		<span class="glyphicon glyphicon-list"></span>
+		List
+	</a>
+{% endblock %}
+
+
+{% block content %}
+
+{% block existing-list %}{% endblock %}
+{% load crispy_forms_tags %}
+<form action="" method="post">
+	{% csrf_token %}
+	<div class="form-actions pull-right">
+		<input class="btn btn-xs btn-primary default" type="submit" value="Create" />
+	</div>
+	{% crispy form %}
+	                           
+</form>
+
+{% endblock %}

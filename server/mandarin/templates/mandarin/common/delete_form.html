@@ -1,0 +1,45 @@
+{% extends "erp/common/base.html" %}
+
+{% load crispy_forms_tags %}
+
+{% block page-header %}
+	{{ title }}
+	<a href="{{ list_url }}" class="btn btn-xs addlink">
+		<span class="fa fa-plus"></span>
+		List
+	</a>
+{% endblock %}
+
+
+{% block content %}
+{% block record-detail %}
+You are about to delete this record. Are you sure?
+{% endblock %}
+
+<form action="" method="post">
+	{% csrf_token %}
+	<div class="form-actions">
+		<div class="pull-left"></div>
+		<div class="pull-right">
+			<a href="{{ cancel_redirect_url }}" class="btn btn-small btn-default">
+				<i class="fa fa-hand-o-left"></i>
+				Back
+			</a>
+			<input class="btn btn-small btn-primary btn-danger" type="submit" value="Delete" />
+
+		</div>		
+	</div>
+</form>
+{% endblock %}
+
+{% block custom_js %}
+<script type="text/javascript">
+var j$ = jQuery.noConflict();
+j$(document).ready(function(){
+	j$('#btn-back').click(function(){
+		return false;
+	});
+});
+</script>
+{% endblock %}
+
