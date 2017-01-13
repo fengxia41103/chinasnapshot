@@ -56,9 +56,6 @@ class MyBaseModel (models.Model):
         blank=True
     )
 
-    # Reporting hierarchy
-    # report_to = models.ForeignKey('self')
-
     # attachments
     attachments = GenericRelation('Attachment')
 
@@ -146,6 +143,8 @@ class AttachmentForm(ModelForm):
 
 
 class AdminDivision(MyBaseModel):
+    '''
+    '''
     ADMIN_DIVISION_LEVEL_CHOICES = (
         ('0', 'central gov level'),
         ('1', 'provincial level'),
@@ -169,25 +168,93 @@ class AdminDivision(MyBaseModel):
         blank=True
     )
 
+    def __unicode__(self):
+        return self.name
+
+
+class Grade(models.Model):
+    '''
+    See reference:
+
+    http://baike.baidu.com/view/1672894.htm#1_5
+    '''
+    name = models.CharField(
+        max_length=16
+    )
+
+    def __unicode__(self):
+        return self.name
+
 
 class Org(MyBaseModel):
-    admin = models.ForeignKey(
-        'AdminDivision',
+    '''
+    Org is an entity that a position is attached to and a person is working for.
+    '''
+    BRANCH_CHOICES = (
+        (0, 'party'),
+        (1, 'legislative'),
+        (2, 'executive'),
+        (3, 'judicial'),
+        (4, 'military'),
+        (5, 'ideology'),
+        (6, 'united front'),
+        (7, 'publicity'),
+        (8, 'foriengn relations')
+    )
+    branch = models.IntegerField(
+        choices=BRANCH_CHOICES,
         null=True,
-        blank=True,
+        blank=True
     )
     official_url = models.URLField(
         null=True,
         blank=True
     )
+    # Reporting hierarchy
+    report_to = models.ForeignKey(
+        'self',
+        null=True,
+        blank=True,
+    )
+
+    def __unicode__(self):
+        return self.name
 
 
 class Title(MyBaseModel):
-    org = models.ForeignKey('Org')
-    grade = models.IntegerField(
-        default=0,
-        verbose_name=u'pay grade'
+    '''
+    Title is the name of a position, eg. deputy, director.
+    '''
+    # Title's grade can be different from org's
+    grade = models.ForeignKey(
+        'Grade',
+        null=True,
+        blank=True
     )
+
+    # Reporting hierarchy
+    # Beside the org reporting structure,
+    # title's can be different
+    report_to = models.ForeignKey(
+        'self',
+        null=True,
+        blank=True,
+    )
+
+    def __unicode__(self):
+        return self.name
+
+
+class Post(models.Model):
+    '''
+    Post is a position within an Org, or job, that the person holds.
+    '''
+    org = models.ForeignKey('Org', null=True, blank=True)
+    title = models.ForeignKey('Title')
+    admin = models.ForeignKey('AdminDivision')
+
+    def __unicode__(self):
+        return '%s (%s)' % (self.title.name, self.admin.name)
 
 
 class Person(MyBaseModel):
@@ -204,20 +271,28 @@ class Person(MyBaseModel):
         blank=True
     )
 
+    def __unicode__(name):
+        return self.name
+
 
 class Career(models.Model):
     person = models.ForeignKey(
         'Person'
     )
-    title = models.ForeignKey(
-        'Title'
+    post = models.ForeignKey(
+        'Post'
     )
-    start = models.DateField()
-    end = models.DateField(  # null if present
+    start = models.CharField(
+        max_length=8,
+        default='1999'
+    )
+    end = models.CharField(  # null if present
+        max_length=8,
         null=True,
         blank=True
     )
 
+    # Reference wiki URL
     ref = models.URLField(
         null=True,
         blank=True

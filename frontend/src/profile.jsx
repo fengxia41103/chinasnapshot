@@ -43,16 +43,15 @@ var ProfileBox = React.createClass({
         tmp.push({
           start: data[i].start,
           end: data[i].end,
-          title: data[i].title.name,
-          abbrev: data[i].title.abbrev,
-          eng_name: data[i].title.eng_name,
-          org: data[i].title.org.name
+          title: data[i].post.title.name,
+          abbrev: data[i].post.title.abbrev,
+          eng_name: data[i].post.title.eng_name,
+          org: data[i].post.admin.name
         });
       }
       // Sort data by "start" field
       return _.sortBy(tmp, 'start');
     }
-
   },
   render: function() {
     // If selected person has changed, update data
@@ -81,8 +80,9 @@ var ProfileBox = React.createClass({
 var PersonBox = React.createClass({
   render: function() {
     const careers = this.props.careers.map((t) => {
+      var tmpKey = randomId();
       return (
-        <tr key={t}>
+        <tr key={tmpKey}>
           <td>{t.start}</td>
           <td>{t.end?t.end:"present"}</td>
           <td>{t.title}</td>

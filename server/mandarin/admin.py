@@ -15,28 +15,34 @@ def admin_register(namespace):
 
 
 class AdminDivisionAdmin(admin.ModelAdmin):
-    list_display = ['name', 'abbrev', 'level', 'code']
+    list_display = ['name', 'level']
 
 
 class OrgAdmin(admin.ModelAdmin):
-    list_display = ['name', 'abbrev', 'eng_name', 'admin']
+    list_display = ['name', 'branch', 'report_to']
 
 
 class TitleAdmin(admin.ModelAdmin):
-    list_display = ['name', 'org', 'grade']
+    list_display = ['name', 'abbrev', 'grade', 'report_to']
 
 
 class PersonAdmin(admin.ModelAdmin):
-    list_display = ['name', 'sex', 'birthday', 'eng_name']
+    list_display = ['name', 'sex', 'birthday']
 
 
 class CareerAdmin(admin.ModelAdmin):
-    list_display = ['person', 'title', 'start', 'end']
-    empty_value_display = '-empty-'
-    date_hierarchy = 'start'
+    list_display = ['person', 'post', 'start', 'end']
 
 
 class ConnectionAdmin(admin.ModelAdmin):
     list_display = ['person_a', 'person_b', 'nature']
+
+
+class GradeAdmin(admin.ModelAdmin):
+    pass
+
+
+class PostAdmin(admin.ModelAdmin):
+    pass
 
 admin_register(namespace=globals())

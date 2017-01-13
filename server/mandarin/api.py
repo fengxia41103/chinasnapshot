@@ -45,22 +45,28 @@ class AdminDivisionResource(MyModelResource):
 
 
 class OrgResource(MyModelResource):
-    admin = fields.ForeignKey(AdminDivisionResource, 'admin', full=True)
 
     class Meta:
         queryset = Org.objects.all()
-        excludes = ['ref', 'abbrev']
-        filtering = {
-            'admin': ALL_WITH_RELATIONS
-        }
+        excludes = ['abbrev']
 
 
 class TitleResource(MyModelResource):
-    org = fields.ForeignKey(OrgResource, 'org', full=True)
 
     class Meta:
         queryset = Title.objects.all()
+
+
+class PostResource(MyModelResource):
+    title = fields.ForeignKey(TitleResource, 'title', full=True)
+    org = fields.ForeignKey(OrgResource, 'org', full=True)
+    admin = fields.ForeignKey(AdminDivisionResource, 'admin', full=True)
+
+    class Meta:
+        queryset = Post.objects.all()
         filtering = {
+            'admin': ALL_WITH_RELATIONS,
+            'title': ALL_WITH_RELATIONS,
             'org': ALL_WITH_RELATIONS
         }
 
@@ -72,14 +78,14 @@ class PersonResource(MyModelResource):
 
 
 class CareerResource(MyModelResource):
-    person = fields.ForeignKey(PersonResource, 'person')
-    title = fields.ForeignKey(TitleResource, 'title', full=True)
+    person = fields.ForeignKey(PersonResource, 'person', full=True)
+    post = fields.ForeignKey(PostResource, 'post', full=True)
 
     class Meta:
         queryset = Career.objects.all()
         filtering = {
             'person': ALL_WITH_RELATIONS,
-            'title': ALL_WITH_RELATIONS
+            'post': ALL_WITH_RELATIONS
         }
 
 
@@ -95,8 +101,15 @@ class ConnectionResource(MyModelResource):
         }
 
 
+class GradeResource(MyModelResource):
+
+    class Meta:
+        queryset = Grade.objects.all()
+
 v1_api = Api(api_name='v1')
 v1_api.register(AdminDivisionResource())
+v1_api.register(GradeResource())
+v1_api.register(PostResource())
 v1_api.register(OrgResource())
 v1_api.register(TitleResource())
 v1_api.register(PersonResource())
