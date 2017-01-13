@@ -15,7 +15,7 @@ import Footer from "./footer.jsx";
 import RootBox from "./rootbox.jsx";
 
 var Page = React.createClass({
-  render () {
+  render() {
     return (
       <div id="wrap" style={{backgroundColor: "#fefefe"}}>
         <Header />

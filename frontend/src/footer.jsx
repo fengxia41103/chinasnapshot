@@ -1,9 +1,8 @@
 // footer.js
 import React from "react";
 
-
 var Footer = React.createClass({
-  render () {
+  render() {
     return (
       <footer className="page-footer">
           <div className="container">
