@@ -51,7 +51,15 @@ class OrgResource(MyModelResource):
         excludes = ['abbrev']
 
 
+class GradeResource(MyModelResource):
+
+    class Meta:
+        queryset = Grade.objects.all()
+        fields = ['name']
+
+
 class TitleResource(MyModelResource):
+    grade = fields.ForeignKey(GradeResource, 'grade', full=True)
 
     class Meta:
         queryset = Title.objects.all()
@@ -100,11 +108,6 @@ class ConnectionResource(MyModelResource):
             'person_b': ALL_WITH_RELATIONS
         }
 
-
-class GradeResource(MyModelResource):
-
-    class Meta:
-        queryset = Grade.objects.all()
 
 v1_api = Api(api_name='v1')
 v1_api.register(AdminDivisionResource())

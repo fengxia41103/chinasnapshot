@@ -52,9 +52,11 @@ var CareerBox = React.createClass({
           start: data[i].start?data[i].start.slice(0,4):'', // year only
           end: data[i].end?data[i].end.slice(0,4):'', // year only
           title: data[i].post.title.name,
+          grade: data[i].post.title.grade.name,
           abbrev: data[i].post.title.abbrev,
           eng_name: data[i].post.title.eng_name,
           division: data[i].post.admin.name,
+          level: data[i].post.admin.level,
           branch: data[i].post.org.branch,
         });
       }
@@ -95,8 +97,8 @@ var CareerTable = React.createClass({
           <td>{t.start}</td>
           <td>{t.end?t.end:"present"}</td>
           <td>{t.abbrev}</td>
-          <td>{t.eng_name}</td>
-          <td>{t.division}</td>
+          <td>{t.grade}</td>
+          <td>{t.division}{t.level}</td>
           <td>{t.branch}</td>
           </tr>
       );
@@ -106,15 +108,16 @@ var CareerTable = React.createClass({
       <div>
         <h1>Career</h1>
         <table className="table table-responsive table-hover table-condensed">
-
-        <tbody>
+          <thead><tr>
         <th>Start</th>
         <th>End</th>
         <th>Title</th>
-        <th>Title in English</th>
+        <th>Grade</th>
         <th>Where</th>
         <th>Branch</th>
+        </tr></thead>
 
+        <tbody>
           {careers}
         </tbody>
         </table>

@@ -146,12 +146,12 @@ class AdminDivision(MyBaseModel):
     '''
     '''
     ADMIN_DIVISION_LEVEL_CHOICES = (
-        ('0', 'central gov level'),
-        ('1', 'provincial level'),
-        ('2', 'prefecture level'),
-        ('3', 'country level'),
-        ('4', 'township level'),
-        ('5', 'village level')
+        (u'中央', u'中央'),
+        (u'省', u'省'),
+        (u'市', u'市'),
+        (u'直辖市', u'直辖市'),
+        (u'自治区', u'自治区'),
+        (u'县', u'县')
     )
     level = models.CharField(
         max_length=8,
