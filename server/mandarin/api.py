@@ -88,6 +88,8 @@ class PersonResource(MyModelResource):
 class CareerResource(MyModelResource):
     person = fields.ForeignKey(PersonResource, 'person', full=True)
     post = fields.ForeignKey(PostResource, 'post', full=True)
+    experience = fields.IntegerField(attribute='_experience', readonly=True)
+    start_age = fields.IntegerField(attribute='_start_age', readonly=True)
 
     class Meta:
         queryset = Career.objects.all()

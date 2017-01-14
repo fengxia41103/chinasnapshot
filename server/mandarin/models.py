@@ -310,6 +310,32 @@ class Career(models.Model):
         blank=True
     )
 
+    # Age started on the job
+    def _start_age(self):
+        '''
+        Compute the age in year (this will introduce
+        error up to +-1year) when the person starts the job.
+        Return None if person's birthday is unknow.'
+        '''
+        if self.person.birthday:
+            return int(self.start[:4]) - self.person.birthday.year
+        else:
+            return None
+    start_age = property(_start_age)
+
+    # Experience on the job
+    def _experience(self):
+        '''
+        Calculate career span in year. Year is the only reliable
+        data point at this moment.
+        '''
+        start = int(self.start[:4])
+        if not self.end:
+            return dt.now().year - start
+        else:
+            return int(self.end[:4]) - start
+    experience = property(_experience)
+
 
 class Connection(models.Model):
     RELATIONSHIP_CHOICES = (
@@ -343,7 +369,4 @@ class Connection(models.Model):
     person_a = models.ForeignKey('Person', related_name='me')
     person_b = models.ForeignKey('Person', related_name='them')
     by_blood = models.BooleanField(default=False)
-    ref = models.URLField(
-        null=True,
-        blank=True
-    )
+    ref = models.URLField(null=True, blank=True)

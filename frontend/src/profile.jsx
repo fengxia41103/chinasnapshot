@@ -58,10 +58,12 @@ var CareerBox = React.createClass({
           division: data[i].post.admin.name,
           level: data[i].post.admin.level,
           branch: data[i].post.org.branch,
+          experience: data[i].experience,
+          start_age: data[i].start_age,
         });
       }
       // Sort data by "start" field
-      return _.sortBy(tmp, 'start');
+      return _.reverse(_.sortBy(tmp, 'start'));
     }
   },
   render: function() {
@@ -98,8 +100,10 @@ var CareerTable = React.createClass({
           <td>{t.end?t.end:"present"}</td>
           <td>{t.abbrev}</td>
           <td>{t.grade}</td>
-          <td>{t.division}{t.level}</td>
+          <td>{t.division==t.level?t.division:t.division+t.level}</td>
           <td>{t.branch}</td>
+          <td>{t.start_age}</td>
+          <td>{t.experience} {t.experience>1?"years":"year"}</td>
           </tr>
       );
     });
@@ -115,6 +119,8 @@ var CareerTable = React.createClass({
         <th>Grade</th>
         <th>Where</th>
         <th>Branch</th>
+        <th>Start age</th>
+        <th>Experience</th>
         </tr></thead>
 
         <tbody>

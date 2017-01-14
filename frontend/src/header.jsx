@@ -8,7 +8,7 @@ var Header = React.createClass({
     return (
       <div className="myheader">
       <div className="container">
-        <h1>China Snapshot</h1>
+        <h1>China Mandarins</h1>
             <p>Make . Life . Better</p>
       </div>
       </div>
