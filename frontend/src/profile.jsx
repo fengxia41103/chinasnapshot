@@ -9,6 +9,14 @@ var randomId = function() {
 };
 
 var ProfileBox = React.createClass({
+  render: function(){
+    return (
+      <CareerBox {...this.props}/>
+    );
+  }
+});
+
+var CareerBox = React.createClass({
   getInitialState: function() {
     return {
       data: []
@@ -41,12 +49,13 @@ var ProfileBox = React.createClass({
       for (var i = 0; i < data.length; i++) {
         // Internal data format
         tmp.push({
-          start: data[i].start,
-          end: data[i].end,
+          start: data[i].start?data[i].start.slice(0,4):'', // year only
+          end: data[i].end?data[i].end.slice(0,4):'', // year only
           title: data[i].post.title.name,
           abbrev: data[i].post.title.abbrev,
           eng_name: data[i].post.title.eng_name,
-          org: data[i].post.admin.name
+          division: data[i].post.admin.name,
+          branch: data[i].post.org.branch,
         });
       }
       // Sort data by "start" field
@@ -71,13 +80,13 @@ var ProfileBox = React.createClass({
     return (
       <div>
         {this.state.data.length?
-         <PersonBox careers={this.state.data} {...this.props} />:null}
+         <CareerTable careers={this.state.data} {...this.props} />:null}
     </div>
     );
   }
 });
 
-var PersonBox = React.createClass({
+var CareerTable = React.createClass({
   render: function() {
     const careers = this.props.careers.map((t) => {
       var tmpKey = randomId();
@@ -85,10 +94,10 @@ var PersonBox = React.createClass({
         <tr key={tmpKey}>
           <td>{t.start}</td>
           <td>{t.end?t.end:"present"}</td>
-          <td>{t.title}</td>
           <td>{t.abbrev}</td>
           <td>{t.eng_name}</td>
-          <td>{t.org}</td>
+          <td>{t.division}</td>
+          <td>{t.branch}</td>
           </tr>
       );
     });
@@ -97,19 +106,20 @@ var PersonBox = React.createClass({
       <div>
         <h1>Career</h1>
         <table className="table table-responsive table-hover table-condensed">
-        <thead>
+
+        <tbody>
         <th>Start</th>
         <th>End</th>
         <th>Title</th>
-        <th>Abbrev</th>
-        <th>Eng name</th>
-        <th>Org</th>
-        </thead>
-        <tbody>
+        <th>Title in English</th>
+        <th>Where</th>
+        <th>Branch</th>
+
           {careers}
         </tbody>
         </table>
       </div>
+
     );
   }
 });

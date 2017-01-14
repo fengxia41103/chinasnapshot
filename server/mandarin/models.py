@@ -191,17 +191,18 @@ class Org(MyBaseModel):
     Org is an entity that a position is attached to and a person is working for.
     '''
     BRANCH_CHOICES = (
-        (0, 'party'),
-        (1, 'legislative'),
-        (2, 'executive'),
-        (3, 'judicial'),
-        (4, 'military'),
-        (5, 'ideology'),
-        (6, 'united front'),
-        (7, 'publicity'),
-        (8, 'foriengn relations')
+        ('party', 'party'),
+        ('legislative', 'legislative'),
+        ('executive', 'executive'),
+        ('judicial', 'judicial'),
+        ('military', 'military'),
+        ('ideology', 'ideology'),
+        ('united front', 'united front'),
+        ('publicity', 'publicity'),
+        ('foreign relations', 'foriengn relations')
     )
-    branch = models.IntegerField(
+    branch = models.CharField(
+        max_length=32,
         choices=BRANCH_CHOICES,
         null=True,
         blank=True
@@ -257,10 +258,20 @@ class Post(models.Model):
         return '%s (%s)' % (self.title.name, self.admin.name)
 
 
-class Person(MyBaseModel):
+class Person(models.Model):
     SEX_CHOICES = (
         ('M', 'male'),
         ('F', 'female')
+    )
+
+    name = models.CharField(
+        default=None,
+        max_length=128,
+        verbose_name=u'名称'
+    )
+    eng_name = models.CharField(
+        max_length=128,
+        default=''
     )
     sex = models.CharField(
         max_length=1,
@@ -270,8 +281,9 @@ class Person(MyBaseModel):
         null=True,
         blank=True
     )
+    photo = models.URLField(null=True, blank=True)
 
-    def __unicode__(name):
+    def __unicode__(self):
         return self.name
 
 
