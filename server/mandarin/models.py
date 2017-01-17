@@ -151,7 +151,8 @@ class AdminDivision(MyBaseModel):
         (u'市', u'市'),
         (u'直辖市', u'直辖市'),
         (u'自治区', u'自治区'),
-        (u'县', u'县')
+        (u'县', u'县'),
+        (u'特别行政区', u'特别行政区')
     )
     level = models.CharField(
         max_length=8,

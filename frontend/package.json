@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "bootstrap": "^3.3.7",
+    "china-geojson": "^1.0.0",
     "classnames": "^2.2.5",
     "console-polyfill": "^0.2.3",
     "d3plus": "^1.9.8",
