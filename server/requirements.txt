@@ -105,7 +105,7 @@ memory-profiler==0.32
 microsofttranslator==0.7
 mock==1.0.1
 MySQL-python==1.2.5
-nltk==3.0.5
+nltk==3.4.5
 nodeenv==0.13.6
 numpy==1.9.1
 oauthlib==0.7.2
