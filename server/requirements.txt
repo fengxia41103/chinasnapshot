@@ -95,7 +95,7 @@ lazy-object-proxy==1.2.2
 librabbitmq==1.6.1
 libsass==0.6.2
 line-profiler==1.0
-lxml==3.4.1
+lxml==4.6.3
 Mako==1.0.4
 Markdown==2.4.1
 MarkupSafe==0.23
