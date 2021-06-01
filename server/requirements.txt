@@ -179,7 +179,7 @@ tornado==4.1
 typogrify==2.0.7
 Unidecode==0.4.19
 unittest2==0.8.0
-urllib3==1.10.2
+urllib3==1.26.5
 wrapt==1.10.8
 xlrd==0.9.4
 XlsxWriter==0.7.2
