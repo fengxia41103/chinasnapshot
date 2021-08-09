@@ -79,7 +79,7 @@ feedgenerator==1.8
 flake8==3.2.1
 flower==0.8.3
 futures==2.2.0
-Glances==2.6.2
+Glances==3.2.1
 googlemaps==2.1.1
 greenlet==0.4.9
 gunicorn==19.3.0
