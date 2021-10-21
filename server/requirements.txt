@@ -6,7 +6,7 @@ argcomplete==0.8.7
 astroid==1.4.5
 autopep8==1.2.1
 awscli==1.10.54
-Babel==1.3
+Babel==2.9.1
 backports.ssl-match-hostname==3.4.0.2
 beautifulsoup4==4.3.2
 behave==1.2.5
