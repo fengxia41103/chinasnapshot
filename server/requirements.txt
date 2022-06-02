@@ -84,7 +84,7 @@ googlemaps==2.1.1
 greenlet==0.4.9
 gunicorn==19.3.0
 guppy==0.1.10
-html5lib==0.999
+html5lib==0.99999999
 imagesize==0.7.1
 influxdb==2.6.0
 Jinja2==2.8
