@@ -139,7 +139,7 @@ pysmi==0.0.7
 pysnmp==4.3.2
 PySocks==1.5.0
 python-dateutil==2.5.3
-python-docx==0.8.5
+python-docx==0.8.6
 python-magic==0.4.12
 python-memcached==1.54
 python-mimeparse==1.5.1
